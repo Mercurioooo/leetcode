@@ -44,30 +44,35 @@ class Solution {
     /*
      * 荷兰三色旗问题解
      */
-    public void sortColors(int[] nums) {
+    int nums[];
+
+    public void sortColors(int[] array) {
+        this.nums = array;
         // 对于所有 idx < i : nums[idx < i] = 0
         // j是当前考虑元素的下标
-        int p0 = 0, curr = 0;
+        int head = 0, curr = 0;
         // 对于所有 idx > k : nums[idx > k] = 2
-        int p2 = nums.length - 1;
+        int tail = nums.length - 1;
         // [2,0,1]
-        int tmp;
-        while (curr <= p2) {
+        while (curr <= tail) {
             if (nums[curr] == 0) {
                 // 交换第 p0个和第curr个元素
                 // i++，j++
-                tmp = nums[p0];
-                nums[p0++] = nums[curr];
-                nums[curr++] = tmp;
+                swap(head, curr);
+                head++;
+                curr++;
             } else if (nums[curr] == 2) {
-                // 交换第k个和第curr个元素
-                // p2--
-                tmp = nums[curr];
-                nums[curr] = nums[p2];
-                nums[p2--] = tmp;
+                swap(curr, tail);
+                tail--;
             } else
                 curr++;
         }
+    }
+
+    private void swap(int a, int b) {
+        int temp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = temp;
     }
 }
 
